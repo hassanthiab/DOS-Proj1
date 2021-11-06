@@ -46,10 +46,20 @@ class Info(Resource):
     def get(self, idreq):
         result = Storage.query.filter_by(ID=idreq).first()
         return result
-
+class Update(Resource):
+    @marshal_with(resource_fields)
+    def put(self, idreq):
+        result = Storage.query.filter_by(ID=idreq).first()
+        result.stock = result.stock-1
+        if result.stock==0:
+            result.stock=5
+        db.session.commit()
+        return result
 
 
 api.add_resource(Search, "/search/<string:topicreq>")
-api.add_resource(Info,"/info/<int:idreq>")
+api.add_resource(Info, "/info/<int:idreq>")
+api.add_resource(Update, "/update/<int:idreq>")
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8000, debug=True)
