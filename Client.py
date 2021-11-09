@@ -8,11 +8,11 @@ while 1:
         topic = input("Enter Topic name\n")
         response = requests.get(BASE + "search/"+topic)
         print(response.json())
-    if UserInput == "2":
+    elif UserInput == "2":
         ID = input("Enter ID of book\n")
         response = requests.get(BASE + "info/"+ID)
         print(response.json())
-    if UserInput == "3":
+    elif UserInput == "3":
         ID = input("Enter ID of book\n")
         response = requests.put(BASE2 + "purchase/"+ID)
         print(response.text)
