@@ -3,7 +3,7 @@ from datetime import timedelta
 from flask import Flask
 from flask_restful import Api, Resource, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
-
+import socket
 # We connect the SQLAlchemy to DB created by SQLITE3
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
@@ -75,6 +75,5 @@ class Update(Resource):
 api.add_resource(Search, "/search/<string:topicreq>")
 api.add_resource(Info, "/info/<int:idreq>")
 api.add_resource(Update, "/update/<int:idreq>")
-
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000, debug=True)
+    app.run(host=socket.gethostbyname(socket.gethostname()), port=8000, debug=True)

@@ -1,8 +1,9 @@
 # Link for CatalogServer since we need to communicate with it through REST
-BASE = "http://127.0.0.1:8000/"
+BASE = "http://192.168.1.123:8000/"
 import requests
 from flask import Flask
 from flask_restful import Api, Resource, fields, marshal_with
+import socket
 
 app = Flask(__name__)
 api = Api(app)
@@ -27,4 +28,4 @@ class purchase(Resource):
 api.add_resource(purchase, "/purchase/<string:idreq>")
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host=socket.gethostbyname(socket.gethostname()), port=5000, debug=True)

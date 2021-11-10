@@ -1,0 +1,8 @@
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 3,
+    "cost": 100
+}
+
