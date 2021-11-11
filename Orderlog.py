@@ -1,9 +1,10 @@
-# Link for CatalogServer since we need to communicate with it through REST
+
 import requests
 from flask import Flask
 from flask_restful import Api, Resource, fields, marshal_with
 import socket
-
+# Link for CatalogServer since we need to communicate with it through REST
+# This needs to be filled twice in terminal for some reason
 BASE = input("Enter the Catalog IP Server only EX:192.168.1.123\n")
 app = Flask(__name__)
 api = Api(app)
@@ -27,7 +28,7 @@ class purchase(Resource):
 
 # Add resource end point link
 api.add_resource(purchase, "/purchase/<string:idreq>")
-
+# We run the Server on the PRIVATE SERVER IP which we can get through socket
 if __name__ == "__main__":
 
     app.run(host=socket.gethostbyname(socket.gethostname()+".local"), port=5000, debug=True)
