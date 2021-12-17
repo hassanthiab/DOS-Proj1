@@ -38,3 +38,11 @@
     "cost": 100
 }
 
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 5,
+    "cost": 100
+}
+

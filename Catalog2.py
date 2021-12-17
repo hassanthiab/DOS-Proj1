@@ -77,4 +77,4 @@ api.add_resource(Info, "/info/<int:idreq>")
 api.add_resource(Update, "/update/<int:idreq>")
 # We run the Server on the PRIVATE SERVER IP which we can get through socket
 if __name__ == "__main__":
-    app.run(host=socket.gethostbyname(socket.gethostname()+".local"), port=8000, debug=True)
+    app.run(host=socket.gethostbyname(socket.gethostname()+".local"), port=8001, debug=True)
