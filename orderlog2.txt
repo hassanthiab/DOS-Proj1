@@ -1,0 +1,96 @@
+{
+    "ID": 2,
+    "name": "Xen and the Art of Surviving Undergraduate School.",
+    "topic": "undergraduate school",
+    "stock": 45,
+    "cost": 10
+}
+
+{
+    "ID": 2,
+    "name": "Xen and the Art of Surviving Undergraduate School.",
+    "topic": "undergraduate school",
+    "stock": 44,
+    "cost": 10
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+

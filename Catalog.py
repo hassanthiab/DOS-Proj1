@@ -4,6 +4,11 @@ from flask import Flask
 from flask_restful import Api, Resource, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
 import socket
+import requests
+
+BASE = input("Enter the Catalog IP Server only EX:192.168.1.123\n")
+
+BASE2 = input("Enter the Client IP Server only EX:192.168.1.123\n")
 # We connect the SQLAlchemy to DB created by SQLITE3
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
@@ -27,7 +32,6 @@ class Storage(db.Model):
 
 # Create DB
 db.create_all()
-
 # Resource fields makes the output we get seralizable into JSON. Without we can't turn the file into a JSON format
 resource_fields = {
     'ID': fields.Integer,
@@ -67,7 +71,21 @@ class Update(Resource):
         if result.stock < 0:
             result.stock = result.stock + 1
         db.session.commit()
+        requests.put("http://" + BASE + ":8001/" + "update2/" + str(idreq))
+        requests.put("http://" + BASE2 + ":6000/" + "cache/" + str(idreq))
+        requests.put("http://" + BASE2 + ":6000/" + "cache2/" + result.topic)
         return result
+
+
+class Update2(Resource):
+    @marshal_with(resource_fields)
+    def put(self, idreq):
+        # Filter by ID and get first item. -1 the stock attribute. If it's 0 update stock by 5 then commit.
+        result = Storage.query.filter_by(ID=idreq).first()
+        result.stock = result.stock - 1
+        if result.stock < 0:
+            result.stock = result.stock + 1
+        db.session.commit()
 
 
 # Three end points for the operations the server is meant to execute.
@@ -75,6 +93,7 @@ class Update(Resource):
 api.add_resource(Search, "/search/<string:topicreq>")
 api.add_resource(Info, "/info/<int:idreq>")
 api.add_resource(Update, "/update/<int:idreq>")
+api.add_resource(Update2, "/update2/<int:idreq>")
 # We run the Server on the PRIVATE SERVER IP which we can get through socket
 if __name__ == "__main__":
-    app.run(host=socket.gethostbyname(socket.gethostname()+".local"), port=8000, debug=True)
+    app.run(host=socket.gethostbyname(socket.gethostname() + ".local"), port=8000, debug=True)
