@@ -94,5 +94,5 @@ api.add_resource(cache2, "/cache2/<string:topicreq>")
 # We run the Server on the PRIVATE SERVER IP which we can get through socket
 if __name__ == "__main__":
 
-    app.run(host=socket.gethostbyname(socket.gethostname() + ".local"), port=6000, debug=True)
+    app.run(host='0.0.0.0', port=6000, debug=True)
 

@@ -44,4 +44,4 @@ api.add_resource(purchase2, "/purchase2/<string:idreq>")
 # We run the Server on the PRIVATE SERVER IP which we can get through socket
 if __name__ == "__main__":
 
-    app.run(host=socket.gethostbyname(socket.gethostname()+".local"), port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

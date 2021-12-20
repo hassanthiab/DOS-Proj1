@@ -972,3 +972,27 @@ TypeError: can only concatenate str (not "int") to str
     "cost": 100
 }
 
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
+{
+    "ID": 1,
+    "name": "RPCs for Noobs",
+    "topic": "distributed systems",
+    "stock": 0,
+    "cost": 100
+}
+
