@@ -14,7 +14,6 @@ BASE = input("Enter the Catalog IP Server only EX:192.168.1.123\n")
 BASE2 = input("Enter the Orderlog IP Server only EX:192.168.1.123\n")
 BASE3 = input("Enter the Catalog IP2 Server only EX:192.168.1.123\n")
 BASE4 = input("Enter the Orderlog IP2 Server only EX:192.168.1.123\n")
-# redis_cache = redis.StrictRedis(host='localhost', port=6379, db=0)
 y = 1
 x = 0
 cache_data = {}
@@ -25,6 +24,7 @@ class purchase(Resource):
 
     def put(self, idreq):
         global x
+        # Load balancing, first request goes to one then second to two and loop back
         if x == 0:
             response = requests.put("http://" + BASE2 + ":5000/" + "purchase/" + idreq)
             x = 1
@@ -40,22 +40,19 @@ class Search(Resource):
         global y
         global cache_data
 
-        # if redis_cache.exists(topicreq):
-        # re = json.loads(redis_cache.get(topicreq))
-        # return re
+        # Check if it's in cache
         if topicreq in cache_data:
             return cache_data[topicreq]
         else:
+            # Load balancing for replicas requests as before
             if y == 0:
                 response = requests.get("http://" + BASE + ":8000/" + "search/" + topicreq)
-                # re = json.dumps(response.json())
-                # redis_cache.set(topicreq, re)
+                # Write data onto cache with TOPIC as key
                 cache_data[topicreq] = response.text
                 y = 1
             else:
                 response = requests.get("http://" + BASE3 + ":8001/" + "search/" + topicreq)
-                # re = json.dumps(response.json())
-                # redis_cache.set(topicreq, re)
+                # Write data onto cache with TOPIC as key
                 cache_data[topicreq] = response.text
                 y = 0
 
@@ -66,39 +63,36 @@ class Search(Resource):
 class Info(Resource):
     def get(self, idreq):
         global cache_data
+        # check if in cache
         if idreq in cache_data:
             return cache_data[idreq]
         else:
-
+            #LOAD BALANCE AS BEFORE
             global y
             if y == 0:
                 response = requests.get("http://" + BASE + ":8000/" + "info/" + idreq)
-                # re = json.dumps(response.json())
-                # redis_cache.set(idreq, re)
+                # Write data onto cache with ID as key
                 cache_data[idreq] = response.text
 
                 y = 1
             else:
                 response = requests.get("http://" + BASE3 + ":8001/" + "info/" + idreq)
-                # re = json.dumps(response.json())
-                # redis_cache.set(idreq, re)
+                # Write data onto cache with ID as key
                 cache_data[idreq] = response.text
                 y = 0
 
             return response.json()
 
-
+# Remove all keys that match ID from cache
 class cache(Resource):
 
     def put(self, idreq):
-        # redis_cache.delete(idreq)
         del cache_data[idreq]
 
-
+# Remove all Keys that match the TOPICREQ from cache dictionary
 class cache2(Resource):
 
     def put(self, topicreq):
-        # redis_cache.delete(topicreq)
         del cache_data[topicreq]
 
 

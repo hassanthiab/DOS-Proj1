@@ -24,6 +24,7 @@ class purchase(Resource):
             f.write('\n')
             f.close()
         # We return the order ID after it's purchased successfully
+        # InvokeConsistency for replica
         requests.put("http://" + BASE2 + ":5001/" + "purchase2/" + response.text)
         return "Item " + idreq + " purchased successfully"
 

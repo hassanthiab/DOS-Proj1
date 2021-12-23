@@ -69,10 +69,12 @@ class Update(Resource):
         if result.stock < 0:
             result.stock = result.stock + 1
         db.session.commit()
+        # Invoke consistency for CACHE removal and Consistency for replica
         requests.put("http://" + BASE + ":8000/" + "update2/" + str(idreq))
         requests.put("http://" + BASE2 + ":6000/" + "cache/" + str(idreq))
         requests.put("http://" + BASE2 + ":6000/" + "cache2/" + result.topic)
         return result
+# Consistency for Catalogs. This same function is in Catalog 1
 class Update2(Resource):
     @marshal_with(resource_fields)
     def put(self, idreq):
